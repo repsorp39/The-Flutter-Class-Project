@@ -11,15 +11,41 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ClipOval(
                 child: Image.network(
                   profile.profileImageUrl,
-                  width: 80,
-                  height: 80,
+                  width: 60,
+                  height: 60,
                   fit: BoxFit.cover,
                 ),
               ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Location",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.location_on_outlined, size: 30),
+                      Text(
+                        "Feeding America",
+                        style: TextStyle(fontSize: 16, fontFamily: "Regular"),
+                      ),
+                      Icon(Icons.keyboard_arrow_down),
+                    ],
+                  ),
+                ],
+              ),
+
+              Column(children: [Icon(Icons.notifications_on_outlined)]),
             ],
           ),
           Row(),
