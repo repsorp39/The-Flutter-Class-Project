@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_class_project/models/banner.dart';
 import 'package:flutter_class_project/models/feed.dart';
+import 'package:flutter_class_project/models/notification.dart';
 import 'package:flutter_class_project/models/profile.dart';
 import 'package:flutter_class_project/main.dart';
 import 'package:flutter_class_project/screens/home.dart';
@@ -186,11 +187,22 @@ Help us grow a greener future for Ogden, one vegetable at a time.""",
     id: 1,
     fullname: "Jean Jacques",
     email: "monemailmachin@gmail.com",
-    profileImageUrl:"https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    profileImageUrl:
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     bio: "Passionné des livres, de la tech et autres bof.",
     totalDonations: 15,
     location: "Salt Lake City, Utah",
   );
+
+  final List<NotificationModel> notifications = [
+    NotificationModel(
+      id: 1,
+      title: "Something bla bla",
+      message: "Lorem ipsum indolore la la lo lo ra o ri",
+      timestamp: "il y 1min",
+      isRead: false
+    ),
+  ];
 
   Feed? findFeed(int id) {
     return homeFeeds.firstWhere((Feed f) => f.id == id);
@@ -207,11 +219,10 @@ Help us grow a greener future for Ogden, one vegetable at a time.""",
     currentHomeBannerIndex = min(currentHomeBannerIndex - 1, 0);
   }
 
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(profile: loginUser,),
+      home: HomePage(profile: loginUser, notifications: notifications),
     );
   }
 }

@@ -1,9 +1,16 @@
 class NotificationModel {
+
+    final int id;
+    final String title;
+    final String message;
+    final String timestamp;
+    final bool isRead;
+  
   NotificationModel({
-    required int id,
-    required String title,
-    required String message,
-    required String timestamp,
-    isRead = false,
+    required this.id,
+    required this.title,
+    required this.message,
+    required this.timestamp,
+    required this.isRead,
   });
 }
