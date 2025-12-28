@@ -11,9 +11,3 @@ class MyApp extends StatefulWidget {
   @override
   State <MyApp> createState() => MyAppState();
 }
-
-
-
-dynamic goTo(dynamic context, Widget composant) {
-  Navigator.push(context, MaterialPageRoute(builder: (c) => composant));
-}

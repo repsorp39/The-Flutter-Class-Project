@@ -1,19 +1,31 @@
 class Feed {
-
   final int id;
+  final String imageUrl;
+  final String category;
+  final String location;
+  final String title;
+  final String description;
+  final List<String> eventImages;
+  final int globalCount;
+  final int myOwnCount;
+  final int totalPeopleDonated;
+  final String timeElapsed;
+  final double raised;
+  final double target;
+
   Feed({
     required this.id,
-    required String imageUrl,
-    required String category,
-    required String location,
-    required String title,
-    required String description,
-    required List<String> eventImages,
-    required int globalCount,
-    required int myOwnCount,
-    required int totalPeopleDonated,
-    required String timeElapsed,
-    required double raised,
-    required double target,
+    required this.imageUrl,
+    required this.category,
+    required this.location,
+    required this.title,
+    required this.description,
+    required this.eventImages,
+    required this.globalCount,
+    required this.myOwnCount,
+    required this.totalPeopleDonated,
+    required this.timeElapsed,
+    required this.raised,
+    required this.target,
   });
 }

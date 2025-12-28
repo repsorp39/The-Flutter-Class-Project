@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_class_project/models/banner.dart';
 import 'package:flutter_class_project/models/notification.dart';
 import 'package:flutter_class_project/models/profile.dart';
 import 'package:flutter_class_project/screens/notifications.dart';
@@ -7,12 +8,15 @@ import 'package:flutter_class_project/screens/profile.dart';
 class HomePage extends StatelessWidget {
   final Profile profile;
   final List<NotificationModel> notifications;
+  final List<HomeBanner> homeBanner;
 
   const HomePage({
     super.key,
     required this.profile,
     required this.notifications,
+    required this.homeBanner,
   });
+
 
   @override
   Widget build(BuildContext context) {
@@ -91,51 +95,73 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 25),
-              child: Container(
-                padding: EdgeInsets.only(right: 2,left: 2),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                  border: Border.all(color: const Color.fromARGB(255, 182, 179, 179), width: 0.5),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    //expanded c'est comme width 100%
-                    Expanded(
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          border: InputBorder
-                              .none, // Supprime la bordure par défaut
-                          enabledBorder: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          labelText: "Search here ...",
-                          icon: Icon(Icons.search, size: 26, weight: 15),
-                          labelStyle: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w300,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 25),
+                    child: Container(
+                      padding: EdgeInsets.only(right: 15, left: 15),
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 244, 242, 242),
+                        borderRadius: BorderRadius.all(Radius.circular(70)),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          //expanded c'est comme width 100%
+                          Expanded(
+                            child: TextFormField(
+                              decoration: const InputDecoration(
+                                border: InputBorder
+                                    .none, // Supprime toutes les bordures par défaut
+                                enabledBorder: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                errorBorder: InputBorder.none,
+                                disabledBorder: InputBorder.none,
+                                labelText: "Search here ...",
+                                icon: Icon(Icons.search, size: 24, weight: 15),
+                                labelStyle: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w300,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ),
-                    // IconButton(
-                    //   onPressed: () {},
-                    //   icon: Icon(Icons.flashlight_on, color: Colors.white),
-                    //   style: IconButton.styleFrom(
-                    //     backgroundColor: const Color.fromARGB(255, 12, 75, 14),
-                    //   ),
-                    // ),
-                  ],
+                  ),
                 ),
-              ),
+                Padding(
+                  padding: EdgeInsets.only(top: 25, left: 10),
+                  child: IconButton(
+                    onPressed: () {},
+                    style: IconButton.styleFrom(
+                      padding: EdgeInsets.all(15),
+                      backgroundColor: const Color.fromARGB(255, 2, 110, 4),
+                    ),
+                    icon: Icon(Icons.flag, color: Colors.white, weight: 1),
+                  ),
+                ),
+              ],
             ),
-
-            Row(),
+            Container(
+              height: 240,
+              margin: EdgeInsets.only(top:35),
+              decoration: BoxDecoration(
+                boxShadow: [BoxShadow(color: Colors.black26)],
+                border: Border.all(
+                  color: const Color.fromARGB(255, 238, 236, 236),
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(50)),
+              ),
+              child: Image.network(homeBanner[0].imageUrl,fit: BoxFit.cover,),
+            ),
           ],
         ),
       ),
