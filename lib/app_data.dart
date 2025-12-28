@@ -200,7 +200,7 @@ Help us grow a greener future for Ogden, one vegetable at a time.""",
       title: "Something bla bla",
       message: "Lorem ipsum indolore la la lo lo ra o ri",
       timestamp: "il y 1min",
-      isRead: false
+      isRead: false,
     ),
   ];
 
@@ -222,7 +222,11 @@ Help us grow a greener future for Ogden, one vegetable at a time.""",
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(profile: loginUser, notifications: notifications),
+      home: HomePage(
+        profile: loginUser,
+        notifications: notifications,
+        homeBanner: homeBanner,
+      ),
     );
   }
 }
