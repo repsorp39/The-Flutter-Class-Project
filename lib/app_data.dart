@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_class_project/models/banner.dart';
 import 'package:flutter_class_project/models/feed.dart';
