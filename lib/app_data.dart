@@ -9,6 +9,7 @@ import 'package:flutter_class_project/main.dart';
 import 'package:flutter_class_project/screens/home.dart';
 
 class MyAppState extends State<MyApp> {
+  //les items du carousels de la page d'accueil
   final List<HomeBanner> homeBanner = [
     HomeBanner(
       id: 1,
@@ -19,28 +20,38 @@ class MyAppState extends State<MyApp> {
     ),
     HomeBanner(
       id: 3,
-      title: "Share Your Meal",
-      subtitle: "Provide a food kit to a family struggling this month.",
+      title: "Share Your Meal, Help your world",
+      subtitle: "Provide a food kit to a family.",
       imageUrl:
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuPKUZhN_EwDBZGbm6QKP-NvOcjJ-Xk6uCgw&s",
     ),
     HomeBanner(
       id: 4,
-      title: "Emergency Nutrition",
-      subtitle: "Support our urgent child nutrition programs worldwide.",
+      title: "Emergency Nutrition, Emergency Life",
+      subtitle: "Support our urgent child worldwide.",
       imageUrl:
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdoLfoDtnukud6PKDZzrA-mLEkUvLhbPXxWQ&s",
     ),
     HomeBanner(
       id: 5,
-      title: "Be a Local Hero",
-      subtitle: "Volunteer or donate to support our neighborhood food bank.",
+      title: "Be a Local Hero, Be Superman",
+      subtitle: "Volunteer or donation.",
       imageUrl:
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXJXyq-r-m_HvKC2QxUuXEvsLLxJsD-YlKuw&s",
     ),
   ];
+  int currentHomeBannerIndex = 0;
 
-  final List<String> category = [
+  void nextBannerItem() {
+    //de sorte que mm lorqu'il clique sur la dernière image il revient au tout premier
+    currentHomeBannerIndex = (currentHomeBannerIndex + 1) % homeBanner.length;
+  }
+
+  void prevBannerItem() {
+    currentHomeBannerIndex = max(currentHomeBannerIndex - 1, 0);
+  }
+
+  final List<String> categories = [
     "Fresh",
     "Canned",
     "Meals",
@@ -48,6 +59,11 @@ class MyAppState extends State<MyApp> {
     "Bread",
     "Hope",
   ];
+  String selectedCategory = "Fresh";
+
+  void onCategorySelect(String category) {
+    selectedCategory = category;
+  }
 
   final List<Feed> homeFeeds = [
     Feed(
@@ -56,7 +72,7 @@ class MyAppState extends State<MyApp> {
           "https://www.actionagainsthunger.org/app/uploads/2022/10/IIImages_AP_ACF_Senegal_D3_10082017-169-scaled-aspect-ratio-584-489-1.jpg",
       category: "Meals",
       location: "Kent, Utah",
-      title: "Donate food for a cause",
+      title: "Donate Food for a Cause",
       description:
           """Our local community center is launching a massive hunger relief 
 drive to support families affected by recent economic challenges in Kent. 
@@ -76,19 +92,19 @@ Let's turn small acts of kindness into a wave of massive community impact.""",
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjWHsMQaY4bmBzVrr83ZGY2Fv0YcADpx3f2w&s",
       ],
       globalCount: 200,
-      myOwnCount: 5,
+      myOwnCount: 3,
       totalPeopleDonated: 50,
       timeElapsed: "19h",
-      raised: 15000,
-      target: 35000,
+      raised: 480,
+      target: 1500,
     ),
     Feed(
       id: 2,
       imageUrl:
           "https://raisely-images.imgix.net/eaa-2021/uploads/help-charities-fight-hunger-crisis-article-feature-jpeg-349f77.jpeg?fm=jpg&fit=max&w=700&auto=format&q=62",
       category: "Education",
-      location: "Salt Lake, Utah",
-      title: "No Student Goes Hungry",
+      location: "Lake, Utah",
+      title: "No Student Hungry",
       description:
           """Many students in our district rely on school programs as their 
 primary source of daily nutrition and healthy calories. During the 
@@ -111,8 +127,8 @@ Education is the ladder, but nutrition is the floor they stand on.""",
       myOwnCount: 0,
       totalPeopleDonated: 120,
       timeElapsed: "5h",
-      raised: 8200,
-      target: 15000,
+      raised: 800,
+      target: 1800,
     ),
     Feed(
       id: 3,
@@ -120,7 +136,7 @@ Education is the ladder, but nutrition is the floor they stand on.""",
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWxdih2b19PZJMQo-VKZaNCtrbSuFB67VCMQ&s",
       category: "Shelter",
       location: "Provo, Utah",
-      title: "Hot Meals for Cold Nights",
+      title: "Hot Meals",
       description:
           """As the temperatures drop significantly across the Utah Valley, 
 the homeless population in Provo faces life-threatening conditions. 
@@ -144,8 +160,8 @@ Your generosity tonight ensures that we don't have to turn anyone away.""",
       myOwnCount: 10,
       totalPeopleDonated: 210,
       timeElapsed: "2d",
-      raised: 22000,
-      target: 40000,
+      raised: 2000,
+      target: 4000,
     ),
     Feed(
       id: 4,
@@ -153,7 +169,7 @@ Your generosity tonight ensures that we don't have to turn anyone away.""",
           "https://i.guim.co.uk/img/media/25b7f31b7eb234e3ff5ee6982b86b7a9e0aa3827/0_360_8368_5021/master/8368.jpg?width=465&dpr=1&s=none&crop=none",
       category: "Sustainability",
       location: "Ogden, Utah",
-      title: "Sustainable Urban Farming",
+      title: "Sustainable",
       description:
           """We are transforming an abandoned lot in downtown Ogden into a 
 vibrant community garden that provides free organic produce to residents. 
@@ -179,7 +195,7 @@ Help us grow a greener future for Ogden, one vegetable at a time.""",
       totalPeopleDonated: 35,
       timeElapsed: "1w",
       raised: 4500,
-      target: 10000,
+      target: 5000,
     ),
   ];
 
@@ -208,24 +224,31 @@ Help us grow a greener future for Ogden, one vegetable at a time.""",
     return homeFeeds.firstWhere((Feed f) => f.id == id);
   }
 
-  int currentHomeBannerIndex = 0;
-
-  void nextBannerItem() {
-    //de sorte que mm lorqu'il clique sur la dernière image il revient au tout premier
-    currentHomeBannerIndex = (currentHomeBannerIndex + 1) % homeBanner.length;
-  }
-
-  void prevBannerItem() {
-    currentHomeBannerIndex = min(currentHomeBannerIndex - 1, 0);
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: HomePage(
         profile: loginUser,
         notifications: notifications,
-        homeBanner: homeBanner,
+        currentBanner: homeBanner[currentHomeBannerIndex],
+        categories: categories,
+        selectedCategory: selectedCategory,
+        feeds: homeFeeds,
+        nextBannerItem: () {
+          setState(() {
+            nextBannerItem();
+          });
+        },
+        prevBannerItem: () {
+          setState(() {
+            prevBannerItem();
+          });
+        },
+        onCategorySelect: (String category) {
+          setState(() {
+            onCategorySelect(category);
+          });
+        },
       ),
     );
   }

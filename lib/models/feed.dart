@@ -10,8 +10,8 @@ class Feed {
   final int myOwnCount;
   final int totalPeopleDonated;
   final String timeElapsed;
-  final double raised;
-  final double target;
+  final int raised;
+  final int target;
 
   Feed({
     required this.id,
