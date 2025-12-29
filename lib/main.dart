@@ -11,3 +11,7 @@ class MyApp extends StatefulWidget {
   @override
   State <MyApp> createState() => MyAppState();
 }
+
+void goTo(BuildContext context, Widget composant) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => composant));
+}
