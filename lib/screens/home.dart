@@ -7,6 +7,7 @@ import 'package:flutter_class_project/models/profile.dart';
 import 'package:flutter_class_project/screens/notifications.dart';
 import 'package:flutter_class_project/screens/profile.dart';
 import 'package:flutter_class_project/screens/recommandations.dart';
+import 'package:flutter_class_project/screens/search_results.dart';
 
 class HomePage extends StatelessWidget {
   final Profile profile;
@@ -18,8 +19,9 @@ class HomePage extends StatelessWidget {
   final Function onCategorySelect;
   final List<Feed> feeds;
   final String selectedCategory;
+  String inputValue = "";
 
-  const HomePage({
+  HomePage({
     super.key,
     required this.profile,
     required this.notifications,
@@ -136,6 +138,7 @@ class HomePage extends StatelessWidget {
                               //expanded c'est comme width 100%
                               Expanded(
                                 child: TextFormField(
+                                  onChanged: (value) => inputValue = value,
                                   decoration: const InputDecoration(
                                     border: InputBorder
                                         .none, // Supprime toutes les bordures par défaut
@@ -165,7 +168,17 @@ class HomePage extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 25, left: 10),
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          if (inputValue.isNotEmpty) {
+                            goTo(
+                              context,
+                              SearchResults(
+                                searchQuery: inputValue.toLowerCase(),
+                                feeds: feeds,
+                              ),
+                            );
+                          }
+                        },
                         style: IconButton.styleFrom(
                           padding: EdgeInsets.all(15),
                           backgroundColor: const Color.fromARGB(
@@ -175,7 +188,11 @@ class HomePage extends StatelessWidget {
                             58,
                           ),
                         ),
-                        icon: Icon(Icons.flag, color: Colors.white, weight: 1),
+                        icon: Icon(
+                          Icons.flag_outlined,
+                          color: Colors.white,
+                          weight: 1,
+                        ),
                       ),
                     ),
                   ],
@@ -408,12 +425,36 @@ class HomePage extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       spacing: 25,
-                      children: feeds
-                          .where((f) => f.category == selectedCategory)
-                          .map((Feed feed) {
-                            return DonationCard(feed: feed);
-                          })
-                          .toList(),
+                      children:
+                          feeds.indexWhere(
+                                (f) => f.category == selectedCategory,
+                              ) !=
+                              -1 //indexWhere return -1 quand il ne trouve pas ce qu'on lui demande
+                          ? feeds
+                                .where((f) => f.category == selectedCategory)
+                                .map((Feed feed) {
+                                  return DonationCard(feed: feed);
+                                })
+                                .toList()
+                          : [
+                              Container(
+                                padding: EdgeInsets.all(25),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(20),
+                                  ),
+                                  color: Colors.black.withValues(alpha: 0.04),
+                                ),
+                                child: Text(
+                                  "No results found for $selectedCategory",
+                                  style: TextStyle(
+                                    fontFamily: "Regular",
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              ),
+                            ],
                     ),
                   ),
                 ),
