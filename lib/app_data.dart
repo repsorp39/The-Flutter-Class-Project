@@ -59,7 +59,7 @@ class MyAppState extends State<MyApp> {
     "Bread",
     "Hope",
   ];
-  String selectedCategory = "Fresh";
+  String selectedCategory = "Meals";
 
   void onCategorySelect(String category) {
     selectedCategory = category;
@@ -97,12 +97,18 @@ Let's turn small acts of kindness into a wave of massive community impact.""",
       timeElapsed: "19h",
       raised: 480,
       target: 1500,
+      listDonate: [
+        "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=761&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://plus.unsplash.com/premium_photo-1673866484792-c5a36a6c025e?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      ],
     ),
     Feed(
       id: 2,
       imageUrl:
           "https://raisely-images.imgix.net/eaa-2021/uploads/help-charities-fight-hunger-crisis-article-feature-jpeg-349f77.jpeg?fm=jpg&fit=max&w=700&auto=format&q=62",
-      category: "Education",
+      category: "Meals",
       location: "Lake, Utah",
       title: "No Student Hungry",
       description:
@@ -129,12 +135,18 @@ Education is the ladder, but nutrition is the floor they stand on.""",
       timeElapsed: "5h",
       raised: 800,
       target: 1800,
+      listDonate: [
+        "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=761&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://plus.unsplash.com/premium_photo-1673866484792-c5a36a6c025e?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      ],
     ),
     Feed(
       id: 3,
       imageUrl:
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWxdih2b19PZJMQo-VKZaNCtrbSuFB67VCMQ&s",
-      category: "Shelter",
+      category: "Fresh",
       location: "Provo, Utah",
       title: "Hot Meals",
       description:
@@ -162,12 +174,18 @@ Your generosity tonight ensures that we don't have to turn anyone away.""",
       timeElapsed: "2d",
       raised: 2000,
       target: 4000,
+      listDonate: [
+        "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=761&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://plus.unsplash.com/premium_photo-1673866484792-c5a36a6c025e?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      ],
     ),
     Feed(
       id: 4,
       imageUrl:
           "https://i.guim.co.uk/img/media/25b7f31b7eb234e3ff5ee6982b86b7a9e0aa3827/0_360_8368_5021/master/8368.jpg?width=465&dpr=1&s=none&crop=none",
-      category: "Sustainability",
+      category: "Meals",
       location: "Ogden, Utah",
       title: "Sustainable",
       description:
@@ -196,6 +214,12 @@ Help us grow a greener future for Ogden, one vegetable at a time.""",
       timeElapsed: "1w",
       raised: 4500,
       target: 5000,
+      listDonate: [
+        "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=761&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://plus.unsplash.com/premium_photo-1673866484792-c5a36a6c025e?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      ],
     ),
   ];
 

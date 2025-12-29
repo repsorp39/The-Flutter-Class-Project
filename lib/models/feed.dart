@@ -5,6 +5,7 @@ class Feed {
   final String location;
   final String title;
   final String description;
+  final List<String> listDonate;
   final List<String> eventImages;
   final int globalCount;
   final int myOwnCount;
@@ -27,5 +28,6 @@ class Feed {
     required this.timeElapsed,
     required this.raised,
     required this.target,
+    required this.listDonate
   });
 }
