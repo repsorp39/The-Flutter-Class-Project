@@ -24,7 +24,7 @@ class _NotificationPageState extends State<NotificationPage> {
       appBar: AppBar(title: const Text('Notifications')),
       body: _notifications.isEmpty
           ? const Center(child: Text('Aucune notification'))
-          // ListView.builder permet de créer les éléments à la demande dans ce cas des notifications 
+          // ListView.builder permet de créer les éléments à la demande dans ce cas des notifications
           : ListView.builder(
               itemCount: _notifications.length,
               itemBuilder: (context, index) {
@@ -45,7 +45,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     setState(() {
                       _notifications.removeAt(index);
                     });
-                    
+
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Notification supprimée')),
                     );
@@ -80,7 +80,24 @@ class _NotificationPageState extends State<NotificationPage> {
                       style: const TextStyle(fontSize: 12, color: Colors.grey),
                     ),
                     onTap: () {
-                      
+                      // Quand l'utilisateur tape sur la notification on affiche une modale et l'etat de visibilite de la notification passe a true
+                      setState(() {
+                        n.isRead = true;
+                      });
+
+                      showDialog<void>(
+                        context: context,
+                        builder: (c) => AlertDialog(
+                          title: Text(n.title),
+                          content: Text('${n.message}\n\n${n.timestamp}'),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(c),
+                              child: const Text('Fermer'),
+                            ),
+                          ],
+                        ),
+                      );
                     },
                   ),
                 );
