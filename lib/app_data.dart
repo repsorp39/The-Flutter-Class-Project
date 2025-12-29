@@ -218,6 +218,13 @@ Help us grow a greener future for Ogden, one vegetable at a time.""",
       timestamp: "il y 1min",
       isRead: false,
     ),
+     NotificationModel(
+      id: 2,
+      title: "Something bla bla",
+      message: "Lorem ipsum indolore la la lo lo ra o ri",
+      timestamp: "il y 9min",
+      isRead: false,
+    ),
   ];
 
   Feed? findFeed(int id) {
