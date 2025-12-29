@@ -18,10 +18,61 @@ class _NotificationPageState extends State<NotificationPage> {
     _notifications = List<NotificationModel>.from(widget.notif);
   }
 
+  // Marque toutes les notifications comme lues
+  void _markAllRead() {
+    setState(() {
+      for (var n in _notifications) {
+        n.isRead = true;
+      }
+    });
+  }
+
+  // Supprime toutes les notifications après confirmation
+  Future<void> _clearAll() async {
+    final yes = await showDialog<bool>(
+      context: context,
+      builder: (c) => AlertDialog(
+        title: const Text('Supprimer toutes les notifications ?'),
+        content: const Text('Cette action est irréversible.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(c, false),
+            child: const Text('Annuler'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(c, true),
+            child: const Text('Supprimer'),
+          ),
+        ],
+      ),
+    );
+    if (yes == true) {
+      setState(() => _notifications.clear());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Notifications')),
+      appBar: AppBar(
+        title: const Text('Notifications'),
+        actions: [
+          // Bouton texte pour marquer toutes les notifications comme lues
+          TextButton(
+            onPressed: _notifications.isEmpty ? null : _markAllRead,
+            child: const Text(
+              'Tout marquer lu',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          // Icône pour supprimer toutes les notifications 
+          IconButton(
+            onPressed: _notifications.isEmpty ? null : _clearAll,
+            icon: const Icon(Icons.delete_forever),
+            tooltip: 'Supprimer tout',
+          ),
+        ],
+      ),
       body: _notifications.isEmpty
           ? const Center(child: Text('Aucune notification'))
           // ListView.builder permet de créer les éléments à la demande dans ce cas des notifications
