@@ -41,6 +41,7 @@ class DetailsPage extends StatelessWidget {
             Container(
               margin: EdgeInsets.all(10),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     // margin: EdgeInsets.all(9.0),
@@ -61,7 +62,7 @@ class DetailsPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "${(feed.raised / feed.target) * 100} % target reached",
+                        "${((feed.raised / feed.target) * 100).toInt()} % target reached",
                         style: TextStyle(
                           color: Colors.green,
                           fontWeight: FontWeight.bold,
@@ -70,10 +71,50 @@ class DetailsPage extends StatelessWidget {
                       Text("${feed.timeElapsed} left"),
                     ],
                   ),
-                  Row(
-                    children: [
-                      
-                    ],
+                  SizedBox(height: 9),
+                  SizedBox(
+                    height: 35,
+                    child: Stack(
+                      children: [
+                        for (int i = 0; i < feed.listDonate.length; i++)
+                          Positioned(
+                            left: i * 20,
+                            child: Container(
+                              width: 35,
+                              height: 35,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 2,
+                                ), // bordure blanche
+                              ),
+                              child: CircleAvatar(
+                                radius: 40.0 / 2,
+                                backgroundImage: NetworkImage(
+                                  feed.listDonate[i],
+                                ),
+                              ),
+                            ),
+                          ),
+                        //  Afficher le nombre restant si plus de 5 donateurs
+                        if (feed.listDonate.length > 5)
+                          Positioned(
+                            left: 5 * 25,
+                            child: CircleAvatar(
+                              radius: 20,
+                              backgroundColor: Colors.grey[300],
+                              child: Text(
+                                "+${feed.globalCount - 5}",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
                   ),
                 ],
               ),
