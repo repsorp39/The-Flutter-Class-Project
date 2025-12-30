@@ -195,4 +195,132 @@ class _PaymentModalState extends State<PaymentModal> {
                 ),
                 SizedBox(height: 8),
 
-               
+                // Boutons de montants rapides
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: quickAmounts.map((amount) {
+                    return InkWell(
+                      onTap: () => _selectQuickAmount(amount),
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: donationAmount == amount
+                              ? Color.fromARGB(255, 57, 107, 58)
+                              : Color.fromARGB(255, 244, 242, 242),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Text(
+                          "\$$amount",
+                          style: TextStyle(
+                            color: donationAmount == amount
+                                ? Colors.white
+                                : Colors.black,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+                SizedBox(height: 10),
+
+                // Clavier numérique
+                GridView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 5,
+                    crossAxisSpacing: 5,
+                    childAspectRatio: 3.5,
+                  ),
+                  itemCount: 12,
+                  itemBuilder: (context, index) {
+                    if (index < 9) {
+                      // Boutons 1-9
+                      final digit = (index + 1).toString();
+                      return _buildNumberButton(digit, () => _addDigit(digit));
+                    } else if (index == 9) {
+                      // Bouton * à gauche du 0
+                      return _buildNumberButton("*", () {
+                        // Le * peut être utilisé pour ajouter un point décimal ou autre fonction
+                        // Pour l'instant, on ne fait rien
+                      });
+                    } else if (index == 10) {
+                      // Bouton 0 au centre
+                      return _buildNumberButton("0", () => _addDigit("0"));
+                    } else {
+                      // Bouton de suppression (index 11)
+                      return _buildNumberButton(
+                        "",
+                        _deleteDigit,
+                        icon: Icons.backspace_outlined,
+                      );
+                    }
+                  },
+                ),
+                      SizedBox(height: 10),
+                    ],
+                  ),
+                ),
+              ),
+              // Bouton Pay Now fixe en bas
+              Padding(
+                padding: EdgeInsets.all(16),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: _processPayment,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 57, 107, 58),
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                    child: Text(
+                      "Pay Now",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNumberButton(String text, VoidCallback onTap, {IconData? icon}) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(10),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 244, 242, 242),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Center(
+          child: icon != null
+              ? Icon(icon, color: Colors.black, size: 18)
+              : Text(
+                  text,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+        ),
+      ),
+    );
+  }
+}
+
