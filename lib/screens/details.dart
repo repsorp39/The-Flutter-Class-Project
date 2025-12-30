@@ -14,7 +14,7 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Page details')),
+      appBar: AppBar(title: Text("Details", style: TextStyle(fontFamily: 'Regular'),)),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -54,11 +54,13 @@ class _DetailsPageState extends State<DetailsPage> {
                   ),
                   SizedBox(height: 9),
                   LinearProgressIndicator(
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    minHeight: 8,
                     value:
                         widget.feed.raised /
                         widget.feed.target, // Ratio de progression
                     backgroundColor: Colors.grey[200],
-                    color: Colors.green,
+                    color: const Color.fromARGB(255, 57, 162, 60),
                   ),
                   SizedBox(height: 9),
                   Row(
@@ -198,10 +200,10 @@ class _DetailsPageState extends State<DetailsPage> {
         padding: EdgeInsets.all(10),
         child: SizedBox(
           width: double.infinity,
-          height: 50,
+          height: 60,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green,
+              backgroundColor: const Color.fromARGB(255, 23, 124, 26),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
