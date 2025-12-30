@@ -236,15 +236,19 @@ Help us grow a greener future for Ogden, one vegetable at a time.""",
   final List<NotificationModel> notifications = [
     NotificationModel(
       id: 1,
-      title: "Something bla bla",
-      message: "Lorem ipsum indolore la la lo lo ra o ri",
+      title: "We are transforming",
+      message: """By growing our own food, we reduce our carbon footprint and build 
+stronger bonds with our neighbors. Every harvestd""",
       timestamp: "il y 1min",
       isRead: false,
     ),
-     NotificationModel(
+    NotificationModel(
       id: 2,
-      title: "Something bla bla",
-      message: "Lorem ipsum indolore la la lo lo ra o ri",
+      title: "Community who are in need",
+      message:
+          """ By growing our own food, we reduce our carbon footprint and build 
+stronger bonds with our neighbors. Every harvest is shared equally 
+among those who help and those in the community who are in need. """,
       timestamp: "il y 9min",
       isRead: false,
     ),
