@@ -61,4 +61,22 @@ class _PaymentModalState extends State<PaymentModal> {
     );
   }
 
- 
+  @override
+  Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: EdgeInsets.all(20),
+      alignment: Alignment.center,
+        child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxHeight: screenHeight * 0.9,
+          maxWidth: screenWidth > 600 ? 320 : screenWidth - 100,
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(25),
+          ),
+         
