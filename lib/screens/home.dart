@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_class_project/composants/donation_cart.dart';
+import 'package:flutter_class_project/composants/search_bar.dart';
 import 'package:flutter_class_project/models/banner.dart';
 import 'package:flutter_class_project/models/feed.dart';
 import 'package:flutter_class_project/models/notification.dart';
 import 'package:flutter_class_project/models/profile.dart';
-import 'package:flutter_class_project/screens/details.dart';
 import 'package:flutter_class_project/screens/notifications.dart';
 import 'package:flutter_class_project/screens/profile.dart';
+import 'package:flutter_class_project/screens/recommandations.dart';
+import 'package:flutter_class_project/main.dart';
 
 class HomePage extends StatelessWidget {
   final Profile profile;
@@ -30,7 +33,6 @@ class HomePage extends StatelessWidget {
     required this.onCategorySelect,
     required this.feeds,
   });
-
 
   @override
   Widget build(BuildContext context) {
@@ -105,11 +107,8 @@ class HomePage extends StatelessWidget {
                             },
                             icon: Icon(Icons.notifications_active_outlined),
                             style: IconButton.styleFrom(
-                              backgroundColor: const Color.fromARGB(
-                                255,
-                                248,
-                                245,
-                                245,
+                              backgroundColor: Colors.black.withValues(
+                                alpha: 0.03,
                               ),
                               padding: EdgeInsets.all(17),
                             ),
@@ -119,70 +118,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 25),
-                        child: Container(
-                          padding: EdgeInsets.only(right: 15, left: 15),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 244, 242, 242),
-                            borderRadius: BorderRadius.all(Radius.circular(70)),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              //expanded c'est comme width 100%
-                              Expanded(
-                                child: TextFormField(
-                                  decoration: const InputDecoration(
-                                    border: InputBorder
-                                        .none, // Supprime toutes les bordures par défaut
-                                    enabledBorder: InputBorder.none,
-                                    focusedBorder: InputBorder.none,
-                                    errorBorder: InputBorder.none,
-                                    disabledBorder: InputBorder.none,
-                                    labelText: "Search here ...",
-                                    icon: Icon(
-                                      Icons.search,
-                                      size: 24,
-                                      weight: 15,
-                                    ),
-                                    labelStyle: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 25, left: 10),
-                      child: IconButton(
-                        onPressed: () {},
-                        style: IconButton.styleFrom(
-                          padding: EdgeInsets.all(15),
-                          backgroundColor: const Color.fromARGB(
-                            255,
-                            57,
-                            107,
-                            58,
-                          ),
-                        ),
-                        icon: Icon(Icons.flag, color: Colors.white, weight: 1),
-                      ),
-                    ),
-                  ],
-                ),
+                SearchInput(feeds: feeds),
                 Container(
                   margin: EdgeInsets.only(top: 35),
                   child: Stack(
@@ -386,13 +322,21 @@ class HomePage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text(
-                        "See all",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          color: const Color.fromARGB(255, 173, 171, 171),
+                      TextButton(
+                        onPressed: () {
+                          goTo(
+                            context,
+                            RecommandationsAll(allFeedRecommandations: feeds),
+                          );
+                        },
+                        style: TextButton.styleFrom(
+                          textStyle: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: const Color.fromARGB(255, 173, 171, 171),
+                          ),
                         ),
+                        child: Text("See all"),
                       ),
                     ],
                   ),
@@ -403,186 +347,36 @@ class HomePage extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       spacing: 25,
-                      children: feeds.map((Feed feed) {
-                        return Ink(
-                          height: 335,
-                          width:
-                              MediaQuery.of(context).size.width *
-                              0.7, //70% de la largeur de l'ecran pour notre carte
-                          decoration: BoxDecoration(
-                            color: Colors.black.withValues(alpha: 0.03),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: InkWell(
-                            onTap: (){goTo(context, DetailsPage(feed: feed));},
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ClipRRect(
+                      children:
+                          feeds.indexWhere(
+                                (f) => f.category == selectedCategory,
+                              ) !=
+                              -1 //indexWhere return -1 quand il ne trouve pas ce qu'on lui demande
+                          ? feeds
+                                .where((f) => f.category == selectedCategory)
+                                .map((Feed feed) {
+                                  return DonationCard(feed: feed);
+                                })
+                                .toList()
+                          : [
+                              Container(
+                                padding: EdgeInsets.all(25),
+                                decoration: BoxDecoration(
                                   borderRadius: BorderRadius.all(
-                                    Radius.circular(25),
+                                    Radius.circular(20),
                                   ),
-                                  child: Image.network(
-                                    feed.imageUrl,
-                                    fit: BoxFit.cover,
-                                    height: 175,
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.7,
+                                  color: Colors.black.withValues(alpha: 0.04),
+                                ),
+                                child: Text(
+                                  "No results found for $selectedCategory",
+                                  style: TextStyle(
+                                    fontFamily: "Regular",
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 17,
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    top: 10,
-                                    left: 10,
-                                    right: 10,
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            feed.title,
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                              color: const Color.fromARGB(
-                                                255,
-                                                53,
-                                                53,
-                                                53,
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(top: 5),
-                                            child: Row(
-                                              children: [
-                                                Icon(Icons.people_alt_outlined),
-                                                Text(
-                                                  "${feed.raised} ${feed.category}",
-                                                  style: TextStyle(
-                                                    fontFamily: "Regular",
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                    right: 7,
-                                                  ),
-                                                ),
-                                                Icon(
-                                                  Icons.circle,
-                                                  size: 10,
-                                                  color: Colors.red,
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                    left: 7,
-                                                  ),
-                                                ),
-                                                Icon(
-                                                  Icons.location_on_outlined,
-                                                ),
-                                                SizedBox(
-                                                  width: 60,
-                                                  child: Text(
-                                                    feed.location,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    softWrap: true,
-                                                    style: TextStyle(
-                                                      fontFamily: "Regular",
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Icon(
-                                        Icons.check_circle_outline,
-                                        size: 14,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-
-                                Row(
-                                  children: [
-                                    Center(
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                          top: 30,
-                                          left: 10,
-                                          right: 10,
-                                        ),
-                                        child: Stack(
-                                          children: [
-                                            Container(
-                                              height: 7,
-                                              width:
-                                                  MediaQuery.of(
-                                                    context,
-                                                  ).size.width *
-                                                  0.65,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                color: Colors.black.withValues(
-                                                  alpha: 0.03,
-                                                ),
-                                              ),
-                                            ),
-                                            Positioned(
-                                              top: 0,
-                                              child: Container(
-                                                height: 7,
-                                                decoration: BoxDecoration(
-                                                  color: const Color.fromARGB(
-                                                    255,
-                                                    74,
-                                                    139,
-                                                    75,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                ),
-                                                width:
-                                                    MediaQuery.of(
-                                                      context,
-                                                    ).size.width *
-                                                    0.65 *
-                                                    (feed.raised / feed.target),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 10, left: 10),
-                                  child: Text(
-                                    "${feed.myOwnCount} ${feed.category.toLowerCase()} donated.",
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontFamily: "Regular",
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      }).toList(),
+                              ),
+                            ],
                     ),
                   ),
                 ),
@@ -593,8 +387,4 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
-}
-
-void goTo(BuildContext context, Widget composant) {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => composant));
 }
