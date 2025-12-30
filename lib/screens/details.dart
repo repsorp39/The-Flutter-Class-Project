@@ -34,7 +34,7 @@ class _DetailsPageState extends State<DetailsPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsGeometry.all(10),
+              padding: EdgeInsetsGeometry.all(8),
               child: Text(
                 widget.feed.title,
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -54,7 +54,9 @@ class _DetailsPageState extends State<DetailsPage> {
                   ),
                   SizedBox(height: 9),
                   LinearProgressIndicator(
-                    value: widget.feed.raised / widget.feed.target, // Ratio de progression
+                    value:
+                        widget.feed.raised /
+                        widget.feed.target, // Ratio de progression
                     backgroundColor: Colors.grey[200],
                     color: Colors.green,
                   ),
@@ -149,52 +151,71 @@ class _DetailsPageState extends State<DetailsPage> {
                       Text(
                         widget.feed.description,
                         maxLines: isExpanded ? null : 3,
-                        overflow: isExpanded ? TextOverflow.visible : TextOverflow.ellipsis
+                        overflow: isExpanded
+                            ? TextOverflow.visible
+                            : TextOverflow.ellipsis,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            isExpanded = !isExpanded;
+                          });
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 4.0),
+                          child: Text(
+                            isExpanded ? "Voir moins" : "Voir plus",
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
-                        InkWell(
-                          onTap: (){
-                            setState(() {
-                              isExpanded = ! isExpanded;
-                            });
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 4.0),
-                            child: Text(
-                              isExpanded ? "Voir moins" : "Voir plus",
-                              style: TextStyle(
-                                color: Colors.green,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )
-                          )
-                        )
+                      ),
                     ],
                   ),
+                  SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Recent Donors",
-                      style: TextStyle(
-                        color: Colors.green,
-                        fontWeight: FontWeight.bold
-                      ),),
+                      Text(
+                        "Recent Donors",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       Text("See all"),
                     ],
                   ),
                 ],
               ),
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                
-              ),
-              onPressed: (){}, 
-              child: Text("Faire un don ",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold
-              ),))
           ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.all(10),
+        child: SizedBox(
+          width: double.infinity,
+          height: 50,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.green,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+            ),
+            onPressed: () {},
+            child: Text(
+              "Faire un don ",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
         ),
       ),
     );
