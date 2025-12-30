@@ -40,4 +40,25 @@ class _PaymentModalState extends State<PaymentModal> {
     });
   }
 
+  void _processPayment() {
+    final amount = double.tryParse(donationAmount) ?? 0;
+    if (amount < minDonation) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Le montant minimum est \$$minDonation"),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+    // la logique de paiement
+    Navigator.of(context).pop();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Paiement de \$${donationAmount} effectué avec succès!"),
+        backgroundColor: const Color.fromARGB(255, 57, 107, 58),
+      ),
+    );
+  }
+
  
