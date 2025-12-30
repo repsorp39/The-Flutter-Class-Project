@@ -10,6 +10,7 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
+  bool isExpanded = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,7 +117,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 9),
                   if (widget.feed.eventImages.isNotEmpty) ...[
                     SizedBox(height: 10),
                     SizedBox(
@@ -141,14 +142,58 @@ class _DetailsPageState extends State<DetailsPage> {
                       ),
                     ),
                   ],
-                  
-                  Row(children: [
-                      
+                  SizedBox(height: 8.0),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.feed.description,
+                        maxLines: isExpanded ? null : 3,
+                        overflow: isExpanded ? TextOverflow.visible : TextOverflow.ellipsis
+                        ),
+                        InkWell(
+                          onTap: (){
+                            setState(() {
+                              isExpanded = ! isExpanded;
+                            });
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 4.0),
+                            child: Text(
+                              isExpanded ? "Voir moins" : "Voir plus",
+                              style: TextStyle(
+                                color: Colors.green,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          )
+                        )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Recent Donors",
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontWeight: FontWeight.bold
+                      ),),
+                      Text("See all"),
                     ],
                   ),
                 ],
               ),
             ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                
+              ),
+              onPressed: (){}, 
+              child: Text("Faire un don ",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold
+              ),))
           ],
         ),
       ),
