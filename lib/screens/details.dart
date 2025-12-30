@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_class_project/models/feed.dart';
 
-class DetailsPage extends StatelessWidget {
+class DetailsPage extends StatefulWidget {
   final Feed feed;
   const DetailsPage({super.key, required this.feed});
 
+  @override
+  State<DetailsPage> createState() => _DetailsPageState();
+}
+
+class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +26,7 @@ class DetailsPage extends StatelessWidget {
 
               margin: EdgeInsets.all(10),
               child: Image.network(
-                feed.imageUrl,
+                widget.feed.imageUrl,
                 width: double.infinity,
                 height: 300,
                 fit: BoxFit.cover,
@@ -30,30 +35,25 @@ class DetailsPage extends StatelessWidget {
             Padding(
               padding: EdgeInsetsGeometry.all(10),
               child: Text(
-                feed.title,
+                widget.feed.title,
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
-            // Divider(height: 30),
-            // 3. Barre de progression (Données de ton modèle)
-            // Text("Objectif : ${feed.target}\$"),
-            SizedBox(height: 8),
             Container(
               margin: EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    // margin: EdgeInsets.all(9.0),
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Raised : \$ ${feed.raised}"),
-                      Text("Target : \$ ${feed.target}"),
+                      Text("Raised : \$ ${widget.feed.raised}"),
+                      Text("Target : \$ ${widget.feed.target}"),
                     ],
                   ),
                   SizedBox(height: 9),
                   LinearProgressIndicator(
-                    value: feed.raised / feed.target, // Ratio de progression
+                    value: widget.feed.raised / widget.feed.target, // Ratio de progression
                     backgroundColor: Colors.grey[200],
                     color: Colors.green,
                   ),
@@ -62,13 +62,13 @@ class DetailsPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "${((feed.raised / feed.target) * 100).toInt()} % target reached",
+                        "${((widget.feed.raised / widget.feed.target) * 100).toInt()} % target reached",
                         style: TextStyle(
                           color: Colors.green,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text("${feed.timeElapsed} left"),
+                      Text("${widget.feed.timeElapsed} left"),
                     ],
                   ),
                   SizedBox(height: 9),
@@ -76,7 +76,7 @@ class DetailsPage extends StatelessWidget {
                     height: 35,
                     child: Stack(
                       children: [
-                        for (int i = 0; i < feed.listDonate.length; i++)
+                        for (int i = 0; i < widget.feed.listDonate.length; i++)
                           Positioned(
                             left: i * 20,
                             child: Container(
@@ -92,20 +92,20 @@ class DetailsPage extends StatelessWidget {
                               child: CircleAvatar(
                                 radius: 40.0 / 2,
                                 backgroundImage: NetworkImage(
-                                  feed.listDonate[i],
+                                  widget.feed.listDonate[i],
                                 ),
                               ),
                             ),
                           ),
                         //  Afficher le nombre restant si plus de 5 donateurs
-                        if (feed.listDonate.length > 5)
+                        if (widget.feed.listDonate.length > 5)
                           Positioned(
                             left: 5 * 25,
                             child: CircleAvatar(
                               radius: 20,
                               backgroundColor: Colors.grey[300],
                               child: Text(
-                                "+${feed.globalCount - 5}",
+                                "+${widget.feed.globalCount - 5}",
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: Colors.black,
@@ -116,42 +116,38 @@ class DetailsPage extends StatelessWidget {
                       ],
                     ),
                   ),
+                  SizedBox(height: 10),
+                  if (widget.feed.eventImages.isNotEmpty) ...[
+                    SizedBox(height: 10),
+                    SizedBox(
+                      height: 70,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: widget.feed.eventImages.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 12),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image.network(
+                                widget.feed.eventImages[index],
+                                width: 70,
+                                height: 70,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                  
+                  Row(children: [
+                      
+                    ],
+                  ),
                 ],
               ),
-            ),
-
-            Row(
-              children: [
-                // if (feed.eventImages.isNotEmpty) ...[
-                //   Text(
-                //     "Galerie photos",
-                //     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                //   ),
-                //   SizedBox(height: 15),
-                //   // Un container à hauteur fixe est nécessaire pour un ListView horizontal
-                //   SizedBox(
-                //     height: 100,
-                //     child: ListView.builder(
-                //       scrollDirection: Axis.horizontal,
-                //       itemCount: feed.eventImages.length,
-                //       itemBuilder: (context, index) {
-                //         return Padding(
-                //           padding: const EdgeInsets.only(right: 10),
-                //           child: ClipRRect(
-                //             borderRadius: BorderRadius.circular(15),
-                //             child: Image.network(
-                //               feed.eventImages[index],
-                //               width: 100,
-                //               height: 100,
-                //               fit: BoxFit.cover,
-                //             ),
-                //           ),
-                //         );
-                //       },
-                //     ),
-                //   ),
-                // ],
-              ],
             ),
           ],
         ),
