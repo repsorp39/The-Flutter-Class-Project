@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
 import 'package:flutter_class_project/models/feed.dart';
+import 'package:flutter_class_project/screens/modal.dart';
 
+class DetailsPage extends StatefulWidget {
 class DetailsPage extends StatefulWidget {
   final Feed feed;
   const DetailsPage({super.key, required this.feed});
