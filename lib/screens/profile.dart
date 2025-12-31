@@ -9,7 +9,8 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gradientStart = const Color.fromARGB(255, 25, 210, 105);
-
+    final gradientEnd = const Color.fromARGB(255, 10, 202, 116);
+    
     // helper to render a labeled row with icon and divider
     Widget infoRow(IconData icon, String label, String value) {
       return Padding(
@@ -35,6 +36,28 @@ class ProfilePage extends StatelessWidget {
         ),
       );
     }
+
+    Widget thinDivider() => Container(height: 1, color: Colors.grey[200]);
+
+    // avatar inner with image fallback
+    Widget avatarInner = ClipOval(
+      child: Image.network(
+        profile.profileImageUrl,
+        width: 104,
+        height: 104,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return Container(
+            width: 104,
+            height: 104,
+            color: Colors.grey[200],
+            child: Icon(Icons.person, size: 56, color: gradientStart),
+          );
+        },
+      ),
+    );
+
+  
   }
 }
 
