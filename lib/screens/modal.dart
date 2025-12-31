@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:ui';
 
 class PaymentModal extends StatefulWidget {
   const PaymentModal({super.key});
@@ -71,8 +70,8 @@ class _PaymentModalState extends State<PaymentModal> {
       alignment: Alignment.center,
         child: ConstrainedBox(
         constraints: BoxConstraints(
-          maxHeight: screenHeight * 0.9,
-          maxWidth: screenWidth > 600 ? 320 : screenWidth - 100,
+          maxHeight: screenHeight,
+          maxWidth: screenWidth,
         ),
         child: Container(
           decoration: BoxDecoration(
@@ -235,7 +234,7 @@ class _PaymentModalState extends State<PaymentModal> {
                     crossAxisCount: 3,
                     mainAxisSpacing: 5,
                     crossAxisSpacing: 5,
-                    childAspectRatio: 3.5,
+                    childAspectRatio: 2.5,
                   ),
                   itemCount: 12,
                   itemBuilder: (context, index) {
@@ -276,9 +275,9 @@ class _PaymentModalState extends State<PaymentModal> {
                     onPressed: _processPayment,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 57, 107, 58),
-                      padding: EdgeInsets.symmetric(vertical: 12),
+                      padding: EdgeInsets.symmetric(vertical: 20),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(40),
                       ),
                     ),
                     child: Text(

@@ -4,13 +4,13 @@ import 'package:flutter_class_project/models/feed.dart';
 import 'package:flutter_class_project/screens/modal.dart';
 
 class DetailsPage extends StatefulWidget {
-class DetailsPage extends StatefulWidget {
   final Feed feed;
   const DetailsPage({super.key, required this.feed});
 
   @override
   State<DetailsPage> createState() => _DetailsPageState();
 }
+
 
 class _DetailsPageState extends State<DetailsPage> {
   bool isExpanded = false;
@@ -211,7 +211,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 borderRadius: BorderRadius.circular(30),
               ),
             ),
-            onPressed: () {},
+            onPressed: () { showPaymentModal(context); },
             child: Text(
               "Faire un don ",
               style: TextStyle(
@@ -226,3 +226,17 @@ class _DetailsPageState extends State<DetailsPage> {
     );
   }
 }
+
+
+  void showPaymentModal(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black.withOpacity(0.3),
+      builder: (BuildContext context) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+          child: PaymentModal(),
+        );
+      },
+    );
+  }
