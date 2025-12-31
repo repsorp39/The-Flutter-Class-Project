@@ -5,6 +5,7 @@ import 'package:flutter_class_project/models/banner.dart';
 import 'package:flutter_class_project/models/feed.dart';
 import 'package:flutter_class_project/models/notification.dart';
 import 'package:flutter_class_project/models/profile.dart';
+import 'package:flutter_class_project/screens/modal.dart';
 import 'package:flutter_class_project/screens/notifications.dart';
 import 'package:flutter_class_project/screens/profile.dart';
 import 'package:flutter_class_project/screens/recommandations.dart';
@@ -207,7 +208,7 @@ class HomePage extends StatelessWidget {
                             ),
                             padding: EdgeInsetsGeometry.all(20),
                           ),
-                          onPressed: () {},
+                          onPressed: () { showPaymentModal(context);},
                           child: Text(
                             "Donation now",
                             style: TextStyle(

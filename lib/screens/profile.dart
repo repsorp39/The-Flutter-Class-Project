@@ -58,13 +58,11 @@ class ProfilePage extends StatelessWidget {
     );
 
    return Scaffold(
-      appBar: AppBar(title: const Text("My profile page")),
       backgroundColor: Colors.grey[200],
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Header with gradient and avatar overlap
               Stack(
                 clipBehavior: Clip.none,
                 children: [
@@ -157,4 +155,3 @@ class ProfilePage extends StatelessWidget {
     );
   }
 }
-

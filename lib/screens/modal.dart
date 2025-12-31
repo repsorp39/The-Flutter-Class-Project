@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class PaymentModal extends StatefulWidget {
@@ -323,3 +325,16 @@ class _PaymentModalState extends State<PaymentModal> {
   }
 }
 
+
+  void showPaymentModal(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black.withOpacity(0.3),
+      builder: (BuildContext context) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+          child: PaymentModal(),
+        );
+      },
+    );
+  }
