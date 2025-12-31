@@ -62,7 +62,7 @@ class _NotificationPageState extends State<NotificationPage> {
             onPressed: _notifications.isEmpty ? null : _markAllRead,
             child: const Text(
               'Tout marquer lu',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Color.fromARGB(255, 44, 17, 17)),
             ),
           ),
           // Icône pour supprimer toutes les notifications 
