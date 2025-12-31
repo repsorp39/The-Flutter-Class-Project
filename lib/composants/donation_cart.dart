@@ -16,7 +16,14 @@ class DonationCard extends StatelessWidget {
           0.7, //70% de la largeur de l'ecran pour notre carte
       decoration: BoxDecoration(
         color: Colors.black.withValues(alpha: 0.03),
-        borderRadius: BorderRadius.circular(20),
+        // On aligne le radius du haut de la carte avec celui de l'image
+        // pour que les coins supérieurs collent visuellement.
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(25),
+          topRight: Radius.circular(25),
+          bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20),
+        ),
       ),
       child: InkWell(
         hoverColor: Colors.black.withValues(alpha: 0.03),
@@ -27,7 +34,11 @@ class DonationCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(25)),
+              // On arrondit seulement les coins supérieurs de l'image
+              // pour qu'ils correspondent au borderRadius de la carte.
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(25),
+              ),
               child: Image.network(
                 feed.imageUrl,
                 fit: BoxFit.cover,

@@ -16,7 +16,7 @@ class RecommandationsAll extends StatelessWidget {
           style: TextStyle(
             color: Colors.blueGrey,
             fontFamily: "Regular",
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w500,
           ),
         ),
       ),
