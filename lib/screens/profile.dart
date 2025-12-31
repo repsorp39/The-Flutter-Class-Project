@@ -119,7 +119,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ],
               ),
-              /*const SizedBox(height: 80),
+              const SizedBox(height: 80),
 
              // White card with rows and thin dividers
               Container(
@@ -190,7 +190,7 @@ class ProfilePage extends StatelessWidget {
             ],
           ),
         ),
-      ),*/
+      ),
     );
   }
 }
