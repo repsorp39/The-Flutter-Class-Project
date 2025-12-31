@@ -8,8 +8,8 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gradientStart = const Color.fromARGB(255, 25, 210, 105);
-    final gradientEnd = const Color.fromARGB(255, 10, 202, 116);
+    final gradientStart = const Color.fromARGB(255, 3, 122, 55);
+    final gradientEnd = const Color.fromARGB(255, 11, 121, 72);
     
     // helper to render a labeled row with icon and divider
     Widget infoRow(IconData icon, String label, String value) {
@@ -141,18 +141,6 @@ class ProfilePage extends StatelessWidget {
                       thinDivider(),
                       infoRow(Icons.info_outline, 'À propos', profile.bio),
                     ],
-                    thinDivider(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-                      child: Row(
-                        children: [
-                          SizedBox(width: 36, child: Icon(Icons.remove_red_eye_outlined, color: gradientStart)),
-                          const SizedBox(width: 12),
-                          const Expanded(child: Text('Password', style: TextStyle(fontSize: 12, color: Colors.grey))),
-                          IconButton(onPressed: () {}, icon: const Icon(Icons.refresh, color: Colors.grey)),
-                        ],
-                      ),
-                    ),
                     const SizedBox(height: 18),
                   ],
                 ),
@@ -160,31 +148,6 @@ class ProfilePage extends StatelessWidget {
 
               const SizedBox(height: 18),
 
-              // Edit button centered with gradient
-              SizedBox(
-                width: 200,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                    backgroundColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                    elevation: 0,
-                  ),
-                  child: Ink(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: [gradientStart, gradientEnd]),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Container(
-                      alignment: Alignment.center,
-                      constraints: const BoxConstraints(minHeight: 48),
-                      child: const Text('Edit profile', style: TextStyle(color: Colors.white, fontSize: 16)),
-                    ),
-                  ),
-                ),
-              ),
 
               const SizedBox(height: 26),
             ],
