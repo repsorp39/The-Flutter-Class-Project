@@ -55,12 +55,14 @@ class DonationCard extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        feed.title,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: const Color.fromARGB(255, 53, 53, 53),
+                      SingleChildScrollView(
+                        child: Text(
+                          feed.title,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: const Color.fromARGB(255, 53, 53, 53),
+                          ),
                         ),
                       ),
                       Padding(
@@ -76,13 +78,15 @@ class DonationCard extends StatelessWidget {
                             Icon(Icons.circle, size: 10, color: Colors.red),
                             Padding(padding: EdgeInsets.only(left: 7)),
                             Icon(Icons.location_on_outlined),
-                            SizedBox(
-                              width: 60,
-                              child: Text(
-                                feed.location,
-                                overflow: TextOverflow.ellipsis,
-                                softWrap: true,
-                                style: TextStyle(fontFamily: "Regular"),
+                            SingleChildScrollView(
+                              child: SizedBox(
+                                width: 80,
+                                child: Text(
+                                  feed.location,
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                  style: TextStyle(fontFamily: "Regular"),
+                                ),
                               ),
                             ),
                           ],
@@ -95,40 +99,44 @@ class DonationCard extends StatelessWidget {
               ),
             ),
 
-            Row(
-              children: [
-                Center(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 30, left: 10, right: 10),
-                    child: Stack(
-                      children: [
-                        Container(
-                          height: 7,
-                          width: MediaQuery.of(context).size.width * 0.65,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.black.withValues(alpha: 0.03),
-                          ),
-                        ),
-                        Positioned(
-                          top: 0,
-                          child: Container(
-                            height: 7,
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 74, 139, 75),
-                              borderRadius: BorderRadius.circular(10),
+            SingleChildScrollView(
+              child: Row(
+                children: [
+                  SingleChildScrollView(
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 30, left: 10, right: 10),
+                        child: Stack(
+                          children: [
+                            Container(
+                              height: 7,
+                              width: MediaQuery.of(context).size.width * 0.65,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.black.withValues(alpha: 0.03),
+                              ),
                             ),
-                            width:
-                                MediaQuery.of(context).size.width *
-                                0.65 *
-                                (feed.raised / feed.target),
-                          ),
+                            Positioned(
+                              top: 0,
+                              child: Container(
+                                height: 7,
+                                decoration: BoxDecoration(
+                                  color: const Color.fromARGB(255, 74, 139, 75),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                width:
+                                    MediaQuery.of(context).size.width *
+                                    0.65 *
+                                    (feed.raised / feed.target),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Padding(
               padding: EdgeInsets.only(top: 10, left: 10),

@@ -261,6 +261,7 @@ among those who help and those in the community who are in need. """,
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: HomePage(
         profile: loginUser,
         notifications: notifications,
