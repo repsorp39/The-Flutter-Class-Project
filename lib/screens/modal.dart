@@ -56,7 +56,7 @@ class _PaymentModalState extends State<PaymentModal> {
     Navigator.of(context).pop();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text("Paiement de \$${donationAmount} effectué avec succès!"),
+        content: Text("Paid \$${donationAmount} successfully!"),
         backgroundColor: const Color.fromARGB(255, 57, 107, 58),
       ),
     );

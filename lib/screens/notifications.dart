@@ -61,7 +61,7 @@ class _NotificationPageState extends State<NotificationPage> {
           TextButton(
             onPressed: _notifications.isEmpty ? null : _markAllRead,
             child: const Text(
-              'Tout marquer lu',
+              'Read all',
               style: TextStyle(color: Color.fromARGB(255, 44, 17, 17)),
             ),
           ),
