@@ -22,7 +22,7 @@ L'élaboration de cette application a permis d'approfondir les points suivants :
 ## 🚀 Installation et Lancement
   1. **Cloner le projet** :
    ```bash
-   git clone [https://github.com/repsorp39/The-Flutter-Class-Project](https://github.com/repsorp39/The-Flutter-Class-Project)
+   git clone https://github.com/repsorp39/The-Flutter-Class-Project
    ```
 
    2. **Installer les dépendances et démarrer** :
